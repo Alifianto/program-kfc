@@ -1,0 +1,110 @@
+#include <iostream>
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+#define ppn 0.10 
+const int diskon = 10000;
+
+int main(){
+	char nama[50], menu[20], back;
+	int jumlah, makanan, makan, total, bayar, kurang, bonus, pajak, kembalian,
+	harga[5]={15000, 20000, 25000, 23500, 25550}, i=0;
+	bool saldo;
+	
+	do{
+		system("CLS");
+		cout<<"=================================== TIF ======================================="<<endl;
+		cout<<"================================ ICE CREAM =============================="<<endl;
+		cout<<"======================= Yogyakarta || Let's brezeee' ! ================="<<endl;
+		cout<<endl;
+		cout<<"Masukkan Nama Anda : " ; cin>>nama;
+		cout<<"Pilihan menu yang tersedia---"<<endl;
+		cout<<"---------------------------------------------------------------------------------"<<endl;
+		cout<<"|        [1] Chocolate Strawberry    = Rp 15.000                                |"   <<endl;
+		cout<<"|        [2] Chocolate Vanila        = Rp 20.000                                |"   <<endl;
+		cout<<"|        [3] Chocolate Capucinno     = Rp 25.000                                |"   <<endl;
+		cout<<"|        [4] Chocolate Taro          = Rp 23.500                                |"   <<endl;
+		cout<<"|        [5] Chocolate Matcha        = Rp 25.550                                |"   <<endl;
+		cout<<"|--------------------------------------------------------------------------------"<<endl;
+		
+		cout<<"            (Masukkan Menu Makanan Berdasarkan Nomor)"<<endl;
+		cout<<" Silahkan Pilih Ice Cream Anda : "; cin >> makanan;
+		
+		//Percabangan
+		switch(makanan){
+			case 1:
+				strcpy(menu,"Chocolate Strawberry");
+				break;
+			case 2:
+				strcpy(menu,"Chocolate Vanila");
+				i=1;
+				break;
+			case 3:
+				strcpy(menu,"Chocolate Capucinno");
+				i=2;
+				break;
+			case 4:
+				strcpy(menu,"Chocolate Taro");
+				i=3;
+				break;
+			case 5:
+				strcpy(menu,"Chocolate Matcha");
+				i=4;
+				break;
+			default:
+				cout << "Pilihan menu yang anda pilih tidak tersedia..." << endl;
+				goto ulang;
+		}
+		
+		cout<<" Anda memilih " << menu <<endl;
+		cout<<endl;
+		cout<<"Jumlah Ice cream yang dibeli : ";cin>> jumlah;
+		
+		makan = jumlah * harga[i];
+		pajak = makan * ppn;
+		total = pajak + makan;
+		cout << endl;
+		cout << "----------------------------------------------------------------------------" << endl;
+		cout << "|                            TIF ICE CREAM                                 |" << endl;
+		cout << "----------------------------------------------------------------------------" << endl;
+		cout << "\tNama Pemesan                        : "    << nama     <<endl;
+		cout << "\tMenu Pesanan                        : "    << menu     <<endl;
+		cout << "\tJumlah Pesanan                      : "    << jumlah   <<" porsi " <<endl;
+		cout << "\tHarga Pesanan                       : "    << harga[i] << " * "    <<jumlah << endl;
+		cout << "\tPajak Restaurant                    : "    << pajak    <<endl;
+		cout << "\tTotal Pembayaran                    : Rp " << total    <<endl;
+		
+		if(jumlah>=4){
+			bonus = total - diskon;
+			total = bonus;
+			cout << endl;
+			cout << "# Anda mendapatkan diskon Potongan Harga : Rp " << diskon <<" #"<< endl;
+			cout << "Total Pembayaran Setelah diskon  : Rp "<< total << endl;
+		}
+		
+		cout << "--------------------------------------------" << endl;
+		cout << "Silahkan bayar disini         : Rp.";      cin>>bayar;
+		//Perulangan
+		while (saldo=bayar<total){
+			cout << "Saldo anda kurang, Silahkan bayar lagi : Rp. "; cin>>kurang;
+			bayar+=kurang;
+		};
+		
+		kembalian=bayar-total;
+		cout << "Uang yang anda bayar \t\t\t Rp. " << bayar<<endl;
+		cout << "Uang kembalian \t\t\t\t Rp. "     << kembalian <<endl;
+		cout << "##################################################"<<endl;
+		
+		ulang:
+			cout << "             [Y = ya / T = tidak]"<<endl;
+			cout << "         Apakah anda ingin memesan lagi ? [Y/T] = "; cin>>back;
+	}while (back=='Y'||back=='y');
+	cout << endl;
+	cout << "       Terima kasih telah Memesan Makanan di KFC"<<endl;
+	cout << "           Selamat Menikmati"<<endl;
+	
+	return 0;
+}
